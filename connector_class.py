@@ -81,3 +81,22 @@ class Connector:
                 result.append(vacancy)
         return result
 
+    def delete(self, query):
+        """Удаление записей из файла, которые соответствуют запросу"""
+        if not query:
+            return
+
+        del_key, del_value = list(query.items())[0]
+
+        with open(self.__data_file, 'r', encoding='utf8') as f:
+            file_data = json.load(f)
+
+        non_del = []
+        for vacancy in file_data:
+            if vacancy[del_key] == del_value:
+                pass
+            else:
+                non_del.append(vacancy)
+
+        with open(self.__data_file, 'w', encoding='utf8') as f:
+            json.dump(non_del, f, ensure_ascii=False, indent=4)
