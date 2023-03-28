@@ -54,3 +54,17 @@ class Connector:
         #Проверка на актуальность файл по времени
         if (datetime.now() - datetime.fromtimestamp(os.path.getmtime(self.__data_file))).days >= 1:
             raise JSONDegaradationException()
+
+    def insert(self, data):
+        """Запись данных в файл, если файл пустой. Добавление данных в файл, если в нем есть данные"""
+        with open(self.__data_file, 'r', encoding='utf8') as f:
+            file_data = json.load(f)
+
+        if type(data) == dict:
+            file_data.append(data)
+        elif type(data) == list:
+            file_data.extend(data)
+
+        with open(self.__data_file, 'w', encoding='utf8') as f:
+            json.dump(file_data, f, ensure_ascii=False, indent=4)
+
