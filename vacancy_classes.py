@@ -9,7 +9,10 @@ class Vacancy:
         self.name = name
         self.company_name = company_name
         self.url = url
-        self.description = description[:200]
+        if type(description) == str:
+            self.description = description[:200]
+        else:
+            self.description = description
         self.remote_work = remote_work
         self.salary = salary
         super().__init__(*args)

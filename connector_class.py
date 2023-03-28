@@ -44,7 +44,6 @@ class Connector:
                         assert type(item["name"]) == str
                         assert type(item["company_name"]) == str
                         assert type(item["url"]) == str
-                        assert type(item["description"]) == str
                         assert type(item["remote_work"]) == str
                         assert type(item["salary"]) == int
                 except:
