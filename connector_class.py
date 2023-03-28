@@ -68,3 +68,16 @@ class Connector:
         with open(self.__data_file, 'w', encoding='utf8') as f:
             json.dump(file_data, f, ensure_ascii=False, indent=4)
 
+    def select(self, query):
+        """Выбор данных из файла с применением фильтрации"""
+        search_key, search_value = query.items()[0]
+
+        with open(self.__data_file, 'r', encoding='utf8') as f:
+            file_data = json.load(f)
+
+        result = []
+        for vacancy in file_data:
+            if vacancy[search_key] == search_value:
+                result.append(vacancy)
+        return result
+
